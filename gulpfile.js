@@ -8,6 +8,8 @@ var buildProduction = utilities.env.production;
 var del = require('del');
 var jshint = require('gulp-jshint');
 var browserSync = require('browser-sync').create();
+var chai = require('chai');
+var mocha = require('mocha');
 var lib = require('bower-files')({
   "overrides":{
     "bootstrap" : {
@@ -105,3 +107,7 @@ gulp.task('serve', function() {
 gulp.task('bowerBuild', ['bower'], function(){
   browserSync.reload();
 });
+
+gulp.task('test', function() {
+  
+})
