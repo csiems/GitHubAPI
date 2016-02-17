@@ -24,7 +24,6 @@ var lib = require('bower-files')({
   }
 });
 
-
 gulp.task('jshint', function(){
   return gulp.src(['js/*.js'])
     .pipe(jshint())
@@ -110,7 +109,6 @@ gulp.task('serve', function() {
       index: "index.html"
     }
   });
-
   gulp.watch(['js/*.js'], ['jsBuild']);
   gulp.watch(['bower.json'], ['bowerBuild']);
   gulp.watch(['*.html'], ['htmlBuild']);
