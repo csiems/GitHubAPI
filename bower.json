@@ -1,9 +1,8 @@
 {
-  "name": "ping-pong",
+  "name": "CDC",
   "description": "",
   "main": "index.js",
   "authors": [
-    "Illia <ikuchko@gmail.com>"
   ],
   "license": "ISC",
   "moduleType": [],
@@ -19,9 +18,7 @@
     "jquery": "^2.2.0",
     "bootstrap": "^3.3.6",
     "moment": "^2.11.2",
-    "moment-timezone": "~0.5.0"
   },
   "devDependencies": {
-    "moment-timezone": "~0.5.0"
   }
 }
