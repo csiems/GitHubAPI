@@ -12,8 +12,43 @@
     <script src="https://maps.googleapis.com/maps/api/js"></script>
   </head>
   <body>
-    <a href="#" class="button" fuel-type="ELEC">Electric</a>
-    <a href="#" class="button" fuel-type="LPG">Propane</a>
-    <div id="map"></div>
+    <div class="container">
+      <div class="page-header">
+        <h3>
+          <span><img style="max-width:100px; margin-top: -7px;"
+            src="http://icons.iconarchive.com/icons/martz90/hex/128/power-icon.png"></span>
+          Chicagoland Hates Gas
+        </h3>
+      </div>
+      <div class="center-box">
+        <div class="col-sm-3 main-column">
+          <div class="row">
+            <a href="#" class="btn btn-lg" fuel-type="ELEC">Electric</a>
+          </div>
+          <div class="row">
+            <a href="#" class="btn btn-lg" fuel-type="LPG">Propane</a>
+          </div>
+          <div class="row">
+            <a href="#" class="btn btn-lg" fuel-type="BD">Biodiesel</a>
+          </div>
+          <div class="row">
+            <a href="#" class="btn btn-lg" fuel-type="E85">Ethanol</a>
+          </div>
+          <div class="row">
+            <a href="#" class="btn btn-lg" fuel-type="CNG">Compressed Natural Gas (CNG)</a>
+          </div>
+          <div class="row">
+            <a href="#" class="btn btn-lg" fuel-type="LNG">Liquefied Natural Gas (LNG)</a>
+          </div>
+          <div class="row">
+            <a href="#" class="btn btn-lg" fuel-type="HY">Hydrogen</a>
+          </div>
+        </div>
+        <div class="map-wrapper">
+          <div id="map" class="col-sm-9 main-column"></div>
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>
