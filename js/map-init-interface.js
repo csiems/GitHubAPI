@@ -1,6 +1,13 @@
 $(function() {
+  $('').change(function() {
+    if (this.value == 'ELEC') {
+      var searchURL = 'https://data.cityofchicago.org/resource/alternative-fuel-locations.json';
+      return searchURL;
+    }
+  })
+
   $.get({
-    url: 'https://data.cityofchicago.org/resource/alternative-fuel-locations.json',
+    url: searchURL,
     dataType: 'json',
     userAgent: 'test',
     success: function(data) {
