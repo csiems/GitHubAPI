@@ -1,68 +1,70 @@
-var markers = [];
-
 $(function() {
   $.get({
     url: 'https://data.cityofchicago.org/resource/alternative-fuel-locations.json',
     dataType: 'json',
     userAgent: 'test',
     success: function(data) {
-      //Create Array of Lat Longs
-      for (var i = 0; i <= 10; i++) {
-        var myLatLng = {};
-        myLatLng.lat = parseFloat(data[i].location.latitude);
-        myLatLng.lng = parseFloat(data[i].location.longitude);
-        myLatLng.station_name = data[i].station_name;
-        myLatLng.fuel_type_code = data[i].fuel_type_code;
-        myLatLng.street_address = data[i].street_address;
-        myLatLng.city = data[i].city;
-        myLatLng.state = data[i].state;
-        myLatLng.zip = data[i].zip;
-
-        markers.push(myLatLng);
-      }
-      console.log(myLatLng);
-
-      //Initalize Map
+      initializeMap();
       function initializeMap() {
         var bounds = new google.maps.LatLngBounds();
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 42.6727905, lng: -88.2556},
+          center: {lat: 41.894812, lng: -87.605089},
           zoom: 9
         });
 
-        // Loop through our array of Lat Longs & create a marker on the map
-        for( i = 0; i < markers.length; i++ ) {
-          createMarker(markers[i]);
+        for( i = 0; i < data.length; i++ ) {
+          createMarker(data[i]);
         }
 
         function createMarker(markerArray) {
-          var position = new google.maps.LatLng(markerArray);
-          var contentString = '<div class="content">' +
-                                '<h1>' + markerArray.station_name + '</h1>' +
-                                '<h4>Fuel Type: ' + markerArray.fuel_type_code + '</h3>' +
-                                '<p>Address: ' + markerArray.street_address + ', ' + markerArray.city + ', ' + markerArray.state + ' ' + markerArray.zip + '</p>' +
-                              '</div>';
+          var newPosition = createMarkerPosition(markerArray);
+          var contentString = createWindowContent(markerArray);
           var newMarker = new google.maps.Marker({
-            position: position,
+            position: newPosition,
             map: map,
             title: markerArray.station_name
           });
           var newInfoWindow = new google.maps.InfoWindow({
             content: contentString
           });
-
-          newMarker.addListener('click', function() {
-            newInfoWindow.open(map, newMarker);
-          });
-
-          bounds.extend(position);
+          addListenerToWindow(newMarker, newInfoWindow);
+          bounds.extend(newPosition);
         }
 
+        function createMarkerPosition(dataSet) {
+          var myLatLng = {};
+          myLatLng.lat = parseFloat(dataSet.location.latitude);
+          myLatLng.lng = parseFloat(dataSet.location.longitude);
+          return new google.maps.LatLng(myLatLng);
+        }
 
+        function createWindowContent(dataSet) {
+          var string = '<div class="content">' +
+                          '<h1>' + dataSet.station_name + '</h1>' +
+                          '<h4>Fuel Type: ' + dataSet.fuel_type_code + '</h3>' +
+                          '<p>Address: ' + dataSet.street_address + ', ' + dataSet.city + ', ' + data.state + ' ' + data.zip + '</p>' +
+                        '</div>';
+          return string;
+        }
+
+        function addListenerToWindow(target, window) {
+          target.addListener('click', function() {
+            if (!target.open) {
+              window.open(map, target);
+              target.open = true;
+            } else {
+              window.close();
+              target.open = false;
+            }
+            google.maps.event.addListener(map, 'click', function() {
+              window.close();
+              target.open = false;
+            });
+          });
+        }
 
       }
 
-      initializeMap();
     }
   });
 });
