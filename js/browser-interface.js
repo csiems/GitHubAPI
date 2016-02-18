@@ -10,13 +10,13 @@ $(function() {
     userAgent: 'test',
     success: function(data) {
       //Create/Load Markers
-      for (var i = 0; i <= 133; i++) {
+      for (var i = 0; i <= 733; i++) {
         var myLatLng = {};
         myLatLng.lat = parseFloat(data[i].location.latitude);
         myLatLng.lng = parseFloat(data[i].location.longitude);
         markers.push(myLatLng);
       }
-      console.log(myLatLng);
+      console.log(data[0]);
 
       function initializeMap() {
         var bounds = new google.maps.LatLngBounds();
@@ -47,28 +47,13 @@ $(function() {
             marker = new google.maps.Marker({
                 position: position,
                 map: map,
-                title: markers[i][0]
+                title: 'markers[i]'
             });
-            // console.log(position);
-
-            // // Allow each marker to have an info window
-            // google.maps.event.addListener(marker, 'click', (function(marker, i) {
-            //     return function() {
-            //         infoWindow.setContent(infoWindowContent[i][0]);
-            //         infoWindow.open(map, marker);
-            //     }
-            // })(marker, i));
-            // Automatically center the map fitting all markers on the screen
-            // map.fitBounds(bounds);
         }
+
       }
 
       initializeMap();
     }
   });
-
-  // $.get('https://data.cityofchicago.org/resource/alternative-fuel-locations.json', function(response) {
-    // console.log(response);
-    // return response;
-  // });
 });
