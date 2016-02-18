@@ -11,8 +11,17 @@ $(function() {
         var myLatLng = {};
         myLatLng.lat = parseFloat(data[i].location.latitude);
         myLatLng.lng = parseFloat(data[i].location.longitude);
+        myLatLng.station_name = data[i].station_name;
+        myLatLng.fuel_type_code = data[i].fuel_type_code;
+        myLatLng.street_address = data[i].street_address;
+        myLatLng.city = data[i].city;
+        myLatLng.state = data[i].state;
+        myLatLng.zip = data[i].zip;
+
         markers.push(myLatLng);
       }
+      console.log(myLatLng);
+
       //Initalize Map
       function initializeMap() {
         var bounds = new google.maps.LatLngBounds();
@@ -28,11 +37,15 @@ $(function() {
 
         function createMarker(markerArray) {
           var position = new google.maps.LatLng(markerArray);
-          var contentString = '<div class="content">Content</div>';
+          var contentString = '<div class="content">' +
+                                '<h1>' + markerArray.station_name + '</h1>' +
+                                '<h4>Fuel Type: ' + markerArray.fuel_type_code + '</h3>' +
+                                '<p>Address: ' + markerArray.street_address + ', ' + markerArray.city + ', ' + markerArray.state + ' ' + markerArray.zip + '</p>' +
+                              '</div>';
           var newMarker = new google.maps.Marker({
             position: position,
             map: map,
-            title: 'title'
+            title: markerArray.station_name
           });
           var newInfoWindow = new google.maps.InfoWindow({
             content: contentString
@@ -41,6 +54,7 @@ $(function() {
           newMarker.addListener('click', function() {
             newInfoWindow.open(map, newMarker);
           });
+
           bounds.extend(position);
         }
 
