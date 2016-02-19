@@ -44,7 +44,7 @@ gulp.task('jsBrowserify', ['concatInterface'] , function() {
 });
 
 gulp.task("minifyScripts", ["jsBrowserify"], function(){
-  return gulp.src("./build/js/app.js")
+  return gulp.src("./build/js/*.js")
     .pipe(uglify())
     .pipe(gulp.dest("./build/js"));
 });

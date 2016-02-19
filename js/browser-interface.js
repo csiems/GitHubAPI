@@ -1,11 +1,13 @@
 var User = require('./../js/user.js').User;
-var Repo = require('./../js/repos.js').Repo;
 
 $(document).ready(function(){
   $('#submitUserName').click(function(){
     var userName = $('#userName').val();
+    $('#avatarImage').empty();
+    $('#userNameDisplay').empty();
+    $('#userBio').empty();
+    $('#repoInfo').empty();
     $('#userName').val("");
-    $('#showInfo').empty();
     $.get('https://api.github.com/users/' + userName, function(data) {
       var newUser = new User(data);
       $('#avatarImage').append(newUser.avatar_image);
@@ -18,12 +20,9 @@ $(document).ready(function(){
           $('#userRepos').show();
           for (var index in repoData) {
             $('#repoInfo').append('<tr><td><a href="' + repoData[index].html_url + '">' + repoData[index].name + '</a></td><tr>');
-            console.log(repoData[index].name);
           }
         });
       }
-
-
     });
   });
 });
