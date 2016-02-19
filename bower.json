@@ -1,8 +1,8 @@
 {
-  "name": "CDC",
+  "name": "github-api",
   "description": "",
   "main": "index.js",
-  "authors": [
+  "authors": [ "Christopher Siems"
   ],
   "license": "ISC",
   "moduleType": [],
